@@ -4,7 +4,7 @@ import 'package:mongo_dart/mongo_dart.dart' as mongo_dart;
 mongo_dart.Db dbConnector = mongo_dart.Db('mongodb://192.168.1.233/todo');
 mongo_dart.DbCollection coll = dbConnector.collection('todo');
 
-ThemeData theme = ThemeData(
+ThemeData lightTheme = ThemeData(
   // primaryColor: Colors.white,
   unselectedWidgetColor: Colors.white,
   // appBarTheme: AppBarTheme(
@@ -16,6 +16,22 @@ ThemeData theme = ThemeData(
   //   ),
   //   actionsIconTheme: IconThemeData(color: Colors.black),
   // ),
+);
+
+ThemeData darkTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    color: Colors.black,
+  ),
+  unselectedWidgetColor: Colors.white,
+  scaffoldBackgroundColor: Colors.black,
+  cursorColor: Colors.white,
+  accentColor: Colors.blueAccent,
+  //primaryColor: Colors.white,
+  primaryTextTheme: TextTheme(
+    body1: TextStyle(
+      color: Colors.white,
+    ),
+  ),
 );
 
 var todoList;
@@ -89,7 +105,8 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
+      darkTheme: darkTheme,
+      theme: lightTheme,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Todo App'),
@@ -111,6 +128,8 @@ class MyAppState extends State<MyApp> {
           child: Column(
             children: <Widget>[
               TextField(
+                style:
+                    TextStyle(color: Theme.of(context).textTheme.body1.color),
                 controller: _textController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
